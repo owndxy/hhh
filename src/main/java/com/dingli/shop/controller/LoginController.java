@@ -26,8 +26,6 @@ public class LoginController {
   private UserBiz userBiz;
 
 
-  @PostMapping("/login")
-
   public @ResponseBody JsonVo login(@RequestBody User user){
     UserVO userVO = userBiz.findUser(user);
     Meta meta = new Meta();
@@ -49,8 +47,6 @@ public class LoginController {
     return jsonVo;
   }
 
-
-  @PostMapping("/menus")
 
   public @ResponseBody JsonVo menus(@RequestBody User user){
     return null;
