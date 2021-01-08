@@ -12,5 +12,11 @@
     <select id="findUser" parameterType="User" resultMap="UserMap">
         select * from sp_manager where mg_name=#{username} and mg_pwd=#{password}
     </select>
+    <insert id="insertUser" parameterType="User" >
+        insert sp_manager(mg_name,mg_pwd,mg_email,mg_mobile) into values (#{username},#{password},#{email},#{mobole})
+    </insert>
+    <update id="updateUserState" parameterType="Object">
+        update sp_manager set mg_state=#{type} where mg_id=#{uId}
+    </update>
 </mapper>
 
