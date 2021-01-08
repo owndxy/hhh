@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--多表查询-->
+<mapper namespace="com.dingli.shop.dao.MenusDao">
+<!--    <resultMap id="MenusMap" type="MenusVo">-->
+<!--        <id property="id" column="mg_id" />-->
+<!--        <result property="username" column="mg_name" />-->
+<!--        <result property="rid" column="role_id" />-->
+<!--        <result property="mobile" column="mg_mobile" />-->
+<!--        <result property="email" column="mg_email" />-->
+<!--    </resultMap>-->
+    <select id="findMenus" parameterType="MenusVo" >
+        select * from sp_report_2
+    </select>
+</mapper>
+
