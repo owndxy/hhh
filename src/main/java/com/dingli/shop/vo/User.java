@@ -3,7 +3,7 @@ package com.dingli.shop.vo;
 
 public class User {
   private Integer uId;
-  private Integer type;
+  private boolean type;
   private String username;
   private String password;
   private String email;
@@ -31,7 +31,7 @@ public class User {
     this.create_time = create_time;
   }
 
-  public User(Integer uId, Integer type) {
+  public User(Integer uId, boolean type) {
     this.uId = uId;
     this.type = type;
   }
@@ -44,11 +44,11 @@ public class User {
     this.uId = uId;
   }
 
-  public Integer getType() {
+  public boolean getType() {
     return type;
   }
 
-  public void setType(Integer type) {
+  public void setType(boolean type) {
     this.type = type;
   }
 

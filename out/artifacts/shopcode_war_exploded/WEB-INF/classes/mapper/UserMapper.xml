@@ -12,6 +12,9 @@
     <select id="findUser" parameterType="User" resultMap="UserMap">
         select * from sp_manager where mg_name=#{username} and mg_pwd=#{password}
     </select>
+    <select id="selOneUser" parameterType="Integer" resultMap="UserMap">
+        SELECT * from sp_manager p1,sp_role p2 where p1.role_id=p2.role_id and mg_id = #{id}
+    </select>
     <resultMap id="AllUserMap" type="User1">
         <id property="id" column="mg_id" />
         <result property="username" column="mg_name" />
@@ -27,13 +30,18 @@
     <select id="findSinUser" parameterType="User1" resultMap="AllUserMap">
         SELECT * from sp_manager p1,sp_role p2 where p1.role_id=p2.role_id and p1.mg_name = #{username}
     </select>
-
     <insert id="insertUser" parameterType="User" >
         insert into sp_manager(mg_name,mg_pwd,mg_email,mg_mobile,mg_time)
         values (#{username},#{password},#{email},#{mobile},#{create_time})
     </insert>
-    <update id="updateUserState" >
+    <update id="updateUserState" parameterType="User">
         update sp_manager set mg_state=#{type} where mg_id=#{uId}
+    </update>
+    <delete id="deleteUser" parameterType="Integer">
+        delete from sp_manager where mg_id = #{id}
+    </delete>
+    <update id="updateUser" parameterType="User">
+        update sp_manager set mg_email = #{email},mg_mobile = #{mobile} where mg_id = #{uId}
     </update>
 </mapper>
 

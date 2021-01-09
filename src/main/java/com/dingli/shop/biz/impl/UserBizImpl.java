@@ -2,7 +2,6 @@ package com.dingli.shop.biz.impl;
 
 import com.dingli.shop.biz.UserBiz;
 import com.dingli.shop.dao.UserDao;
-import com.dingli.shop.po.UserUSVo;
 import com.dingli.shop.vo.User;
 import com.dingli.shop.po.UserVO;
 import com.dingli.shop.vo.User1;
@@ -44,6 +43,15 @@ public class UserBizImpl implements UserBiz {
   }
 
   @Override
+  public UserVO selOneUser(Integer id) {
+    try {
+      return userDao.selOneUser(id);
+    }catch (Exception e){
+      return null;
+    }
+  }
+
+  @Override
   public boolean insertUser(User user) {
     try{
       return userDao.insertUser(user);
@@ -54,11 +62,29 @@ public class UserBizImpl implements UserBiz {
   }
 
   @Override
-  public boolean updateUserState(Integer id, Boolean type) {
+  public boolean updateUserState(User user) {
     try{
-      return userDao.updateUserState(id,type);
+      return userDao.updateUserState(user);
     }catch (Exception e){
       return false;
+    }
+  }
+
+  @Override
+  public boolean deleteUser(Integer id) {
+    try{
+      return userDao.deleteUser(id);
+    }catch (Exception e){
+      return false;
+    }
+  }
+
+  @Override
+  public UserVO updateUser(User user) {
+    try {
+      return userDao.updateUser(user);
+    }catch (Exception e){
+      return null;
     }
   }
 }
