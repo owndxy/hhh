@@ -2,7 +2,9 @@ package com.dingli.shop.dao;
 
 import com.dingli.shop.po.MenusVo;
 
+import java.util.List;
+
 public interface MenusDao {
 
-    MenusVo findMenus(MenusVo menusvo);
+    public List<MenusVo> findMenus();
 }

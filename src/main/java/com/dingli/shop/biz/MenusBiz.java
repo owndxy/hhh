@@ -2,6 +2,8 @@ package com.dingli.shop.biz;
 
 import com.dingli.shop.po.MenusVo;
 
+import java.util.List;
+
 public interface MenusBiz {
-    MenusVo findMenus(MenusVo menusvo);
+  public   List<MenusVo> findMenus();
 }

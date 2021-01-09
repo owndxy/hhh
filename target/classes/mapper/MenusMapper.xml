@@ -2,15 +2,20 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--多表查询-->
 <mapper namespace="com.dingli.shop.dao.MenusDao">
-<!--    <resultMap id="MenusMap" type="MenusVo">-->
-<!--        <id property="id" column="mg_id" />-->
-<!--        <result property="username" column="mg_name" />-->
-<!--        <result property="rid" column="role_id" />-->
-<!--        <result property="mobile" column="mg_mobile" />-->
-<!--        <result property="email" column="mg_email" />-->
-<!--    </resultMap>-->
-    <select id="findMenus" parameterType="MenusVo" >
-        select * from sp_report_2
+    <resultMap id="MenusMap" type="MenusVo">
+        <id property="id" column="id" />
+        <result property="authName" column="name" />
+        <result property="path" column="path" />
+        <collection property="children" ofType="MenusVo" column="id" select="getMenuChildren"/>
+    </resultMap>
+    <select id="findMenus" parameterType="MenusVo" resultMap="MenusMap">
+        SELECT p1.ps_id as id,p1.ps_name as name,p2.ps_api_path as path from sp_permission p1,sp_permission_api p2 where
+            p1.ps_level = '0' and p1.ps_id=p2.ps_id
+    </select>
+    <select id="getMenuChildren" parameterType="MenusVo" resultMap="MenusMap">
+        SELECT p1.ps_id as id,p1.ps_name as name,p2.ps_api_path as path from sp_permission p1,sp_permission_api p2 where
+             p1.ps_pid = #{id} and p1.ps_id=p2.ps_id and ps_level='1'
     </select>
 </mapper>
+
 

@@ -2,12 +2,14 @@ package com.dingli.shop.biz.impl;
 
 import com.dingli.shop.biz.UserBiz;
 import com.dingli.shop.dao.UserDao;
-import com.dingli.shop.po.UserInVo;
 import com.dingli.shop.po.UserUSVo;
 import com.dingli.shop.vo.User;
 import com.dingli.shop.po.UserVO;
+import com.dingli.shop.vo.User1;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserBizImpl implements UserBiz {
@@ -24,21 +26,39 @@ public class UserBizImpl implements UserBiz {
   }
 
   @Override
-  public UserInVo insertUser(User user) {
+  public List<User1> findAllUser() {
+    try {
+      return userDao.findAllUser();
+    }catch (Exception e){
+      return null;
+    }
+  }
+
+  @Override
+  public List<User1> findSinUser(String username) {
+    try {
+      return userDao.findSinUser(username);
+    }catch (Exception e){
+      return null;
+    }
+  }
+
+  @Override
+  public boolean insertUser(User user) {
     try{
       return userDao.insertUser(user);
     }catch (Exception e){
-      return null;
+      return false;
     }
 
   }
 
   @Override
-  public UserUSVo updateUserState(Integer id, Boolean type) {
+  public boolean updateUserState(Integer id, Boolean type) {
     try{
       return userDao.updateUserState(id,type);
     }catch (Exception e){
-      return null;
+      return false;
     }
   }
 }

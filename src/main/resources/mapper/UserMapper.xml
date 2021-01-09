@@ -12,10 +12,27 @@
     <select id="findUser" parameterType="User" resultMap="UserMap">
         select * from sp_manager where mg_name=#{username} and mg_pwd=#{password}
     </select>
+    <resultMap id="AllUserMap" type="User1">
+        <id property="id" column="mg_id" />
+        <result property="username" column="mg_name" />
+        <result property="role_name" column="role_name" />
+        <result property="mobile" column="mg_mobile" />
+        <result property="email" column="mg_email" />
+        <result property="mg_state" column="mg_state" />
+        <result property="create_time" column="mg_time" />
+    </resultMap>
+    <select id="findAllUser" parameterType="User1" resultMap="AllUserMap">
+           SELECT * from sp_manager p1,sp_role p2 where p1.role_id=p2.role_id
+    </select>
+    <select id="findSinUser" parameterType="User1" resultMap="AllUserMap">
+        SELECT * from sp_manager p1,sp_role p2 where p1.role_id=p2.role_id and p1.mg_name = #{username}
+    </select>
+
     <insert id="insertUser" parameterType="User" >
-        insert sp_manager(mg_name,mg_pwd,mg_email,mg_mobile) into values (#{username},#{password},#{email},#{mobole})
+        insert into sp_manager(mg_name,mg_pwd,mg_email,mg_mobile,mg_time)
+        values (#{username},#{password},#{email},#{mobile},#{create_time})
     </insert>
-    <update id="updateUserState" parameterType="Object">
+    <update id="updateUserState" >
         update sp_manager set mg_state=#{type} where mg_id=#{uId}
     </update>
 </mapper>

@@ -1,10 +1,12 @@
 package com.dingli.shop.po;
 
+import java.util.List;
+
 public class MenusVo {
     private Integer id;
     private String authName;
     private String path;
-    private MenusVo children;
+    private List<MenusVo> children;
 
     public Integer getId() {
         return id;
@@ -30,11 +32,11 @@ public class MenusVo {
         this.path = path;
     }
 
-    public MenusVo getChildren() {
+    public List<MenusVo> getChildren() {
         return children;
     }
 
-    public void setChildren(MenusVo children) {
+    public void setChildren(List<MenusVo> children) {
         this.children = children;
     }
 }

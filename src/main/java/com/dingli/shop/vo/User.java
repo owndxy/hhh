@@ -1,5 +1,6 @@
 package com.dingli.shop.vo;
 
+
 public class User {
   private Integer uId;
   private Integer type;
@@ -7,18 +8,27 @@ public class User {
   private String password;
   private String email;
   private String mobile;
+  private long create_time;
 
+  public long getCreate_time() {
+    return create_time;
+  }
+
+  public void setCreate_time(long create_time) {
+    this.create_time = create_time;
+  }
 
   public User(String username, String password) {
     this.username = username;
     this.password = password;
   }
 
-  public User(String username, String password, String email, String mobile) {
+  public User(String username, String password, String email, String mobile,Integer create_time) {
     this.username = username;
     this.password = password;
     this.email = email;
     this.mobile = mobile;
+    this.create_time = create_time;
   }
 
   public User(Integer uId, Integer type) {

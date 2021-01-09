@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -23,7 +24,8 @@ public class LoginController {
   private JwtUtils jwt;
   @Autowired
   private UserBiz userBiz;
-  private MenusBiz menusBiz;
+  @Autowired
+  private MenusBiz m;
   @PostMapping("/login")
   public @ResponseBody JsonVo login(@RequestBody User user){
     UserVO userVO = userBiz.findUser(user);
@@ -47,18 +49,19 @@ public class LoginController {
   }
 
   @GetMapping("/menus")
-  public @ResponseBody JsonVo menus(@RequestBody MenusVo menusVo){
+  public @ResponseBody JsonVo menus(){
     JsonVo jsonVo = new JsonVo();
     Meta meta = new Meta();
-    MenusVo menusVo1 = menusBiz.findMenus(menusVo);
+    List<MenusVo> menusVo1 = m.findMenus();
     if(menusVo1 == null){
       meta.setMsg("获取菜单列表失败");
+      System.out.println("失败");
       meta.setStatus(400);
     }else{
       meta.setMsg("获取菜单列表成功");
       meta.setStatus(200);
     }
-    jsonVo.setData(menusVo);
+    jsonVo.setData(menusVo1);
     jsonVo.setMeta(meta);
     return jsonVo;
   }

@@ -6,14 +6,16 @@ import com.dingli.shop.po.MenusVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MenusBizImpl implements MenusBiz {
     @Autowired
     private MenusDao menusDao;
     @Override
-    public MenusVo findMenus(MenusVo menusvo) {
+    public List<MenusVo> findMenus() {
         try {
-            return menusDao.findMenus(menusvo);
+            return menusDao.findMenus();
         }catch (Exception e){
             return null;
         }

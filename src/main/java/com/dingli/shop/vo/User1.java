@@ -1,14 +1,13 @@
-package com.dingli.shop.po;
+package com.dingli.shop.vo;
 
-import java.util.Date;
-
-public class UserInVo {
+public class User1 {
     private Integer id;
     private String username;
     private String email;
     private String mobile;
-    private Integer role_id;
-    private Integer create_time;
+    private String role_name;
+    private boolean mg_state;
+    private long create_time;
 
     public Integer getId() {
         return id;
@@ -42,19 +41,27 @@ public class UserInVo {
         this.mobile = mobile;
     }
 
-    public Integer getRole_id() {
-        return role_id;
+    public String getRole_name() {
+        return role_name;
     }
 
-    public void setRole_id(Integer role_id) {
-        this.role_id = role_id;
+    public void setRole_name(String role_name) {
+        this.role_name = role_name;
     }
 
-    public Integer getCreate_time() {
+    public boolean isMg_state() {
+        return mg_state;
+    }
+
+    public void setMg_state(boolean mg_state) {
+        this.mg_state = mg_state;
+    }
+
+    public long getCreate_time() {
         return create_time;
     }
 
-    public void setCreate_time(Integer create_time) {
+    public void setCreate_time(long create_time) {
         this.create_time = create_time;
     }
 }
