@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--多表查询-->
+<mapper namespace="com.dingli.shop.dao.ReportDao">
+    <resultMap id="ReportMap" type="ReportVo">
+        <id property="legend" column="rp1_area " />
+        <result property="xAxis" column="rp1_date" />
+        <result property="path" column="path" />
+        <collection property="series" ofType="Series" column="rp1_area" select="getSeries"/>
+        <collection property="xAxis" ofType="XAxis"  select="getXAxis"/>
+    </resultMap>
+    <select id="getChart" parameterType="ReportVo" resultMap="ReportMap">
+        select rp1_area  from sp_report_1 GROUP BY rp1_area
+    </select>
+    <resultMap id="XAxisMap" type="XAxis">
+        <id property="date" column="rp1_date " />
+    </resultMap>
+    <select id="getXAxis" parameterType="XAxis" resultMap="XAxisMap">
+       select rp1_date  from sp_report_1 GROUP BY rp1_date
+    </select>
+    <resultMap id="SeriesMap" type="Integer">
+        <id property="date" column="rp1_user_count " />
+    </resultMap>
+    <select id="getSeries" parameterType="Series" resultMap="SeriesMap">
+        select rp1_user_count from sp_report_1 where rp1_area = #{legend}
+    </select>
+</mapper>
